@@ -25,6 +25,7 @@
   "homepage": "https://github.com/neurosity/app-hello-world-notion-js#readme",
   "dependencies": {
     "@neurosity/notion": "^3.8.0",
-    "dotenv": "^8.2.0"
+    "@neurosity/sdk": "^6.5.7",
+    "dotenv": "^8.6.0"
   }
 }
