@@ -17,7 +17,7 @@ const verifyEnvs = (email, password, deviceId) => {
 verifyEnvs(email, password, deviceId);
 console.log(`${email} attempting to authenticate with ${deviceId}`);
 
-const notion = new Notion({
+const neurosity = new Neurosity({
   deviceId
 });
 
@@ -31,6 +31,7 @@ const main = async () => {
     throw new Error(error);
   });
   console.log("Logged in");
+
 
   notion.calm().subscribe((calm) => {
     if (calm.probability > 0.3) {
