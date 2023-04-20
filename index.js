@@ -1,10 +1,14 @@
-const { Notion } = require("@neurosity/notion");
-require('dotenv').config();
+// == Dependencies ==
+//const { Notion } = require("@neurosity/notion");
+const { Neurosity } = require("@neurosity/sdk");
+require("dotenv").config();
 
+// == Authentication ==
 const deviceId = process.env.DEVICE_ID || "";
 const email = process.env.EMAIL || "";
 const password = process.env.PASSWORD || "";
 
+//Get info from .env
 const verifyEnvs = (email, password, deviceId) => {
   const invalidEnv = (env) => {
     return (env === "");
@@ -17,12 +21,15 @@ const verifyEnvs = (email, password, deviceId) => {
 verifyEnvs(email, password, deviceId);
 console.log(`${email} attempting to authenticate with ${deviceId}`);
 
+// == Instantiate the Neurosity class ==
 const neurosity = new Neurosity({
   deviceId
 });
 
+// == Add async login ==
 const main = async () => {
-  await notion.login({
+
+  await neurosity.login({
     email,
     password
   })
@@ -32,12 +39,25 @@ const main = async () => {
   });
   console.log("Logged in");
 
+// == ADD SUBSCRIPTIONS ==
+// ------------------------------------------------------
 
-  notion.calm().subscribe((calm) => {
+// Calm Subscription
+  neurosity.calm().subscribe((calm) => {
     if (calm.probability > 0.3) {
-      console.log("Hello world");
+      console.log("Hello world!");
     }
   });
-}
+
+/*
+  //Kinesis Subscription
+  neurosity.kinesis("leftHandPinch").subscribe((intent) => {
+    console.log("Hello World!");
+  });
+
+*/
+
+
+} //main
 
 main();
